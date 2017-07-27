@@ -92,23 +92,19 @@ public class EatView extends View {
         // 取 drawable 的颜色格式
         Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
                 : Bitmap.Config.RGB_565;
-        // 建立对应 bitmap
+
         Bitmap bitmap = Bitmap.createBitmap(w, h, config);
         // 建立对应 bitmap 的画布
         Canvas canvas = new Canvas(bitmap);
         drawable.setBounds(50, 50, w + 50, h + 50);
-        // 把 drawable 内容画到画布中
-
+        drawable.draw(canvas);
 
         Matrix matrix = new Matrix();
-        // 缩放原图
         matrix.postScale(1f, 1f);
-        // 向左旋转45度，参数为正则向右旋转
         matrix.postRotate(-45);
         //bmp.getWidth(), 500分别表示重绘后的位图宽高
-        Bitmap dstbmp = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), 500,
+        Bitmap dstbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h,
                 matrix, true);
-//        drawable.draw(dstbmp);
         return dstbmp;
     }
 
